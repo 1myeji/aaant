@@ -1,24 +1,23 @@
-// import axios from 'axios';
-import React from 'react';
+import axios from 'axios';
 
-function aaa() {}
+const baseURL = process.env.REACT_APP_API_URL;
+const token = process.env.REACT_APP_TOKEN;
 
-// const baseURL = process.env.REACT_APP_API_URL;
-// const token = process.env.REACT_APP_TOKEN;
+if (token === undefined) {
+  throw new Error('Missing token');
+}
 
-// const baseInstance = axios.create({
-//   baseURL,
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//   },
-// });
+const baseInstance = axios.create({
+  baseURL,
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
-// baseInstance.interceptors.response.use(({ data }) => data);
+baseInstance.interceptors.response.use(({ data }) => data.data);
 
-// const apiRequest = {
-//   get: (url, request) => baseInstance.get(url, request),
-//   delete: (url, request) => baseInstance.delete(url, request),
-//   post: (url, data, config) => baseInstance.post(url, data, config),
-// };
+const apiRequest = {
+  get: async (url: string) => baseInstance.get(url),
+};
 
-// export default apiRequest;
+export default apiRequest;

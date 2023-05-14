@@ -1,36 +1,14 @@
-// import apiRequest from './index';
-import React from 'react';
+import apiRequest from './index';
 
-function bbb() {}
+const RESOURCE = '/search';
 
-// const RESOURCE = '/todos';
+const getTodoList = async (keyword: string, page: number) => {
+  try {
+    const response = await apiRequest.get(`${RESOURCE}?q=${keyword}&page=${page}`);
+    return response;
+  } catch (error) {
+    throw new Error('API getTodoList error');
+  }
+};
 
-// export const getTodoList = async () => {
-//   try {
-//     const response = await apiRequest.get(`${RESOURCE}`);
-
-//     return response;
-//   } catch (error) {
-//     throw new Error('API getTodoList error');
-//   }
-// };
-
-// export const createTodo = async data => {
-//   try {
-//     const response = await apiRequest.post(`${RESOURCE}`, data);
-
-//     return response;
-//   } catch (error) {
-//     throw new Error('API createTodo error');
-//   }
-// };
-
-// export const deleteTodo = async id => {
-//   try {
-//     const response = await apiRequest.delete(`${RESOURCE}/${id}`);
-
-//     return response;
-//   } catch (error) {
-//     throw new Error('API deleteTodo error');
-//   }
-// };
+export default getTodoList;

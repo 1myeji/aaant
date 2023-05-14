@@ -1,10 +1,18 @@
 import React, { useCallback, useState } from 'react';
 import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
+import getTodoList from '../api/todo';
 
 function InputTodo({ setTodos }: any) {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
+
+  const aaa = async () => {
+    const response = await getTodoList('lorem', 1);
+    console.log(response);
+  };
+
+  aaa();
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
