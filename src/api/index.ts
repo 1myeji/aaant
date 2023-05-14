@@ -1,21 +1,24 @@
-import axios from "axios";
+// import axios from 'axios';
+import React from 'react';
 
-const baseURL = process.env.REACT_APP_API_URL;
-const token = process.env.REACT_APP_TOKEN;
+function aaa() {}
 
-const baseInstance = axios.create({
-  baseURL,
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
+// const baseURL = process.env.REACT_APP_API_URL;
+// const token = process.env.REACT_APP_TOKEN;
 
-baseInstance.interceptors.response.use(({ data }) => data);
+// const baseInstance = axios.create({
+//   baseURL,
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// });
 
-const apiRequest = {
-  get: (url, request) => baseInstance.get(url, request),
-  delete: (url, request) => baseInstance.delete(url, request),
-  post: (url, data, config) => baseInstance.post(url, data, config),
-};
+// baseInstance.interceptors.response.use(({ data }) => data);
 
-export default apiRequest;
+// const apiRequest = {
+//   get: (url, request) => baseInstance.get(url, request),
+//   delete: (url, request) => baseInstance.delete(url, request),
+//   post: (url, data, config) => baseInstance.post(url, data, config),
+// };
+
+// export default apiRequest;

@@ -1,14 +1,15 @@
-import TodoItem from "./TodoItem";
+import React from 'react';
+import TodoItem from './TodoItem';
 
-const TodoList = ({ todos, setTodos }) => {
-  return todos.length ? (
+function TodoList({ todos, setTodos }: any) {
+  return todos.length !== 0 ? (
     <ul>
-      {todos.map(({ id, title }) => (
+      {todos.map(({ id, title }: any) => (
         <TodoItem key={id} id={id} title={title} setTodos={setTodos} />
       ))}
     </ul>
   ) : (
-    <div className="empty-list">...</div>
+    <div className="empty-list">하하하</div>
   );
-};
+}
 export default TodoList;

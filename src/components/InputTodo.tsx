@@ -1,54 +1,53 @@
-import { FaPlusCircle, FaSpinner } from "react-icons/fa";
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from 'react';
+import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
 
-import { createTodo } from "../api/todo";
-import useFocus from "../hooks/useFocus";
-
-const InputTodo = ({ setTodos }) => {
-  const [inputText, setInputText] = useState("");
+function InputTodo({ setTodos }: any) {
+  const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { ref, setFocus } = useFocus();
-
-  useEffect(() => {
-    setFocus();
-  }, [setFocus]);
+  const [isFocus, setIsFocus] = useState(false);
 
   const handleSubmit = useCallback(
-    async (e) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       try {
         e.preventDefault();
         setIsLoading(true);
 
         const trimmed = inputText.trim();
-        if (!trimmed) {
-          return alert("Please write something");
+        if (trimmed !== null) {
+          return alert('Please write something');
         }
 
-        const newItem = { title: trimmed };
-        const { data } = await createTodo(newItem);
+        // const newItem = { title: trimmed };
+        // const { data } = await createTodo(newItem);
 
-        if (data) {
-          return setTodos((prev) => [...prev, data]);
-        }
+        // if (data !== null) {
+        //   return setTodos((prev: any) => [...prev, data]);
+        // }
       } catch (error) {
         console.error(error);
-        alert("Something went wrong.");
+        alert('Something went wrong.');
       } finally {
-        setInputText("");
+        setInputText('');
         setIsLoading(false);
       }
+      return null;
     },
     [inputText, setTodos],
   );
 
   return (
-    <form className="form-container" onSubmit={handleSubmit}>
+    <form
+      className={`form-container${isFocus ? ' focused' : ''}`}
+      onSubmit={handleSubmit}
+      onFocus={() => setIsFocus(true)}
+      onBlur={() => setIsFocus(false)}
+    >
+      <img src="/Union.png" alt="search-icon" className="search-icon" />
       <input
         className="input-text"
-        placeholder="Add new todo..."
-        ref={ref}
+        placeholder="검색하세요"
         value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
+        onChange={e => setInputText(e.target.value)}
         disabled={isLoading}
       />
       {!isLoading ? (
@@ -60,6 +59,6 @@ const InputTodo = ({ setTodos }) => {
       )}
     </form>
   );
-};
+}
 
 export default InputTodo;
