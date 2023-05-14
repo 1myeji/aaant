@@ -1,52 +1,39 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
-import getTodoList from '../api/todo';
+import getSuggestedSearchList from '../api/search';
 
-function InputTodo({ setTodos }: any) {
+function InputTodo() {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
 
-  const aaa = async () => {
-    const response = await getTodoList('lorem', 1);
-    console.log(response);
-  };
-
-  aaa();
-
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    const fetchSuggestedSearchLists = async () => {
+      if (inputText.trim() === '') return;
       try {
-        e.preventDefault();
         setIsLoading(true);
-
-        const trimmed = inputText.trim();
-        if (trimmed !== null) {
-          return alert('Please write something');
-        }
-
-        // const newItem = { title: trimmed };
-        // const { data } = await createTodo(newItem);
-
-        // if (data !== null) {
-        //   return setTodos((prev: any) => [...prev, data]);
-        // }
+        const response = await getSuggestedSearchList(inputText, 1);
+        console.log(response);
       } catch (error) {
         console.error(error);
         alert('Something went wrong.');
       } finally {
-        setInputText('');
         setIsLoading(false);
       }
-      return null;
-    },
-    [inputText, setTodos],
-  );
+    };
+
+    const debounceFetch = setTimeout(() => {
+      void fetchSuggestedSearchLists();
+    }, 500);
+
+    return () => {
+      clearTimeout(debounceFetch);
+    };
+  }, [inputText]);
 
   return (
     <form
       className={`form-container${isFocus ? ' focused' : ''}`}
-      onSubmit={handleSubmit}
       onFocus={() => setIsFocus(true)}
       onBlur={() => setIsFocus(false)}
     >
