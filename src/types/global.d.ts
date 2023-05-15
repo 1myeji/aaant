@@ -7,10 +7,14 @@ export type ISuggestedListData = {
   limit: number;
 };
 
-export type ITodoListProps = {
+export type ISuggestedListProps = {
   suggestedList: string[];
+  inputText: string;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export type ITodoItemProps = {
+export type ISuggestedItemProps = {
   suggestedItem: string;
+  inputText: string;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
 };

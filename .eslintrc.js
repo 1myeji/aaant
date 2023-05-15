@@ -47,6 +47,10 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     'no-alert': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
+    'operator-linebreak': 'off',
+    'react/no-array-index-key': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': 'off',
   },
   ignorePatterns: ['node_modules/'],
 };
