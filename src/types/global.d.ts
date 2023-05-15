@@ -9,8 +9,10 @@ export type ISuggestedListData = {
 
 export type ISuggestedListProps = {
   suggestedList: string[];
+  inputText: string;
 };
 
 export type ISuggestedItemProps = {
   suggestedItem: string;
+  inputText: string;
 };

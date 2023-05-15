@@ -12,7 +12,7 @@ function InputSearch() {
 
   useEffect(() => {
     const fetchSuggestedSearchLists = async () => {
-      if (inputText.trim() === '') return;
+      if (inputText.trim() === '') return setSuggestedList([]);
       try {
         setIsLoading(true);
         const response: ISuggestedListData = await getSuggestedSearchList(inputText, 1);
@@ -24,6 +24,7 @@ function InputSearch() {
       } finally {
         setIsLoading(false);
       }
+      return null;
     };
 
     const debounceFetch = setTimeout(() => {
@@ -52,7 +53,7 @@ function InputSearch() {
         />
         {isLoading && <FaSpinner className="spinner" />}
       </form>
-      <SuggestedList suggestedList={suggestedList} />
+      <SuggestedList suggestedList={suggestedList} inputText={inputText} />
     </>
   );
 }

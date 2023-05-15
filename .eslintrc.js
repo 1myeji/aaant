@@ -47,6 +47,8 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     'no-alert': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
+    'operator-linebreak': 'off',
+    'react/no-array-index-key': 'off',
   },
   ignorePatterns: ['node_modules/'],
 };

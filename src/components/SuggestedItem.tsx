@@ -1,12 +1,27 @@
 import React from 'react';
 import { type ISuggestedItemProps } from '../types/global';
 
-function SuggestedItem({ suggestedItem }: ISuggestedItemProps) {
-  if (typeof suggestedItem !== 'string') throw new Error('suggestedItem must be a string');
-  const Item = suggestedItem?.length > 47 ? `${suggestedItem.slice(0, 47)}...` : suggestedItem;
+const SEPARATOR = '~!@#$';
+const MAX_STRING_LENGTH = 47;
+
+function SuggestedItem({ suggestedItem, inputText }: ISuggestedItemProps) {
+  if (typeof suggestedItem !== 'string' || typeof inputText !== 'string') {
+    throw new Error('suggestedItem, inputText must be a string');
+  }
+  const cutItem =
+    suggestedItem?.length > MAX_STRING_LENGTH
+      ? `${suggestedItem.slice(0, MAX_STRING_LENGTH)}...`
+      : suggestedItem;
   return (
     <li className="item">
-      <span>{Item}</span>
+      {cutItem
+        .replaceAll(inputText, `${SEPARATOR}${inputText}${SEPARATOR}`)
+        .split(SEPARATOR)
+        .map((item, index) => (
+          <span key={index} style={{ color: item === inputText ? '#2BC9BA' : 'black' }}>
+            {item}
+          </span>
+        ))}
     </li>
   );
 }
