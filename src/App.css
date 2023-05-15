@@ -31,7 +31,7 @@ body {
 
 .form-container {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   display: flex;
   border: 1px solid #dedede;
   border-radius: 6px;
@@ -163,4 +163,12 @@ body {
 .search-icon {
   width: 16px;
   height: 16px;
+}
+
+.suggested-list {
+  height: 400px;
+  overflow-y: auto;
+  border: 1px solid #dedede;
+  box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.05), 0px 2px 4px rgba(50, 50, 50, 0.1);
+  border-radius: 5px;
 }
