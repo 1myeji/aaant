@@ -53,7 +53,11 @@ function InputSearch() {
         />
         {isLoading && <FaSpinner className="spinner" />}
       </form>
-      <SuggestedList suggestedList={suggestedList} inputText={inputText} />
+      <SuggestedList
+        suggestedList={suggestedList}
+        inputText={inputText}
+        setInputText={setInputText}
+      />
     </>
   );
 }

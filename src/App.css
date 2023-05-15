@@ -127,6 +127,12 @@ body {
 .item:hover {
   opacity: 0.85;
   background-color: #eaeaea;
+  border-radius: 3px;
+}
+
+.item.selected,
+.item.selected:hover {
+  background-color: #d5f4f1;
 }
 
 .item-option {

@@ -2,11 +2,16 @@ import React from 'react';
 import SuggestedItem from './SuggestedItem';
 import { type ISuggestedListProps } from '../types/global';
 
-function SuggestedList({ suggestedList, inputText }: ISuggestedListProps) {
+function SuggestedList({ suggestedList, inputText, setInputText }: ISuggestedListProps) {
   return suggestedList.length !== 0 ? (
     <ul className="suggested-list">
       {suggestedList.map((suggestedItem: string) => (
-        <SuggestedItem key={suggestedItem} suggestedItem={suggestedItem} inputText={inputText} />
+        <SuggestedItem
+          key={suggestedItem}
+          suggestedItem={suggestedItem}
+          inputText={inputText}
+          setInputText={setInputText}
+        />
       ))}
     </ul>
   ) : (

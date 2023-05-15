@@ -10,9 +10,11 @@ export type ISuggestedListData = {
 export type ISuggestedListProps = {
   suggestedList: string[];
   inputText: string;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type ISuggestedItemProps = {
   suggestedItem: string;
   inputText: string;
+  setInputText: React.Dispatch<React.SetStateAction<string>>;
 };
