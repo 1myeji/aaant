@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
   return (
     <header style={headerStyle}>
-      <h1 style={titleStyle}>Toodos</h1>
+      <h1 style={titleStyle}>앤트</h1>
     </header>
   );
 }

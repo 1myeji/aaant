@@ -11,6 +11,7 @@ export type ISuggestedListProps = {
   suggestedList: string[];
   inputText: string;
   setInputText: React.Dispatch<React.SetStateAction<string>>;
+  lastSuggestedItemRef: (el: HTMLElement | null) => void;
 };
 
 export type ISuggestedItemProps = {

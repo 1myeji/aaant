@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { FaSpinner } from 'react-icons/fa';
 import getSuggestedSearchList from '../api/search';
 import SuggestedList from './SuggestedList';
@@ -9,17 +9,33 @@ function InputSearch() {
   const [isLoading, setIsLoading] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
   const [suggestedList, setSuggestedList] = useState<string[]>([]);
+  const [page, setPage] = useState(1);
+  const [qty, setQty] = useState(0);
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastSuggestedItemRef = useCallback(
+    (el: HTMLElement | null) => {
+      if (isLoading || qty === 0) return;
+      if (observer.current !== null) observer.current.disconnect();
+      observer.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          setPage(prev => prev + 1);
+        }
+      });
+      if (el !== null) observer.current.observe(el);
+    },
+    [isLoading],
+  );
 
   useEffect(() => {
     const fetchSuggestedSearchLists = async () => {
       if (inputText.trim() === '') return setSuggestedList([]);
       try {
         setIsLoading(true);
-        const response: ISuggestedListData = await getSuggestedSearchList(inputText, 1);
-        setSuggestedList(response.result);
+        const response: ISuggestedListData = await getSuggestedSearchList(inputText, page);
+        setSuggestedList(prev => [...prev, ...response.result]);
+        setQty(response.qty);
         console.log(response);
       } catch (error) {
-        console.error(error);
         alert('Something went wrong.');
       } finally {
         setIsLoading(false);
@@ -34,7 +50,7 @@ function InputSearch() {
     return () => {
       clearTimeout(debounceFetch);
     };
-  }, [inputText]);
+  }, [inputText, page]);
 
   return (
     <>
@@ -48,7 +64,10 @@ function InputSearch() {
           className="input-text"
           placeholder="검색하세요"
           value={inputText}
-          onChange={e => setInputText(e.target.value)}
+          onChange={e => {
+            setInputText(e.target.value);
+            setSuggestedList([]);
+          }}
           disabled={isLoading}
         />
         {isLoading && <FaSpinner className="spinner" />}
@@ -57,6 +76,7 @@ function InputSearch() {
         suggestedList={suggestedList}
         inputText={inputText}
         setInputText={setInputText}
+        lastSuggestedItemRef={lastSuggestedItemRef}
       />
     </>
   );
