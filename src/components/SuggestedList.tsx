@@ -2,11 +2,17 @@ import React from 'react';
 import SuggestedItem from './SuggestedItem';
 import { type ISuggestedListProps } from '../types/global';
 
-function SuggestedList({ suggestedList, inputText, setInputText }: ISuggestedListProps) {
+function SuggestedList({
+  suggestedList,
+  inputText,
+  setInputText,
+  lastSuggestedItemRef,
+}: ISuggestedListProps) {
   return suggestedList.length !== 0 ? (
     <ul className="suggested-list">
-      {suggestedList.map((suggestedItem: string) => (
+      {suggestedList.map((suggestedItem: string, index: number) => (
         <SuggestedItem
+          ref={index === suggestedList.length - 1 ? lastSuggestedItemRef : null}
           key={suggestedItem}
           suggestedItem={suggestedItem}
           inputText={inputText}
@@ -18,4 +24,5 @@ function SuggestedList({ suggestedList, inputText, setInputText }: ISuggestedLis
     <div className="empty-list">검색어없음...</div>
   );
 }
+
 export default SuggestedList;

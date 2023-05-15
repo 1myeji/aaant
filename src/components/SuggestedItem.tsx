@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, forwardRef, type Ref } from 'react';
 import { type ISuggestedItemProps } from '../types/global';
 
 const SEPARATOR = '~!@#$^*#%^&';
 const MAX_STRING_LENGTH = 47;
 
-function SuggestedItem({ suggestedItem, inputText, setInputText }: ISuggestedItemProps) {
+function SuggestedItem(
+  { suggestedItem, inputText, setInputText }: ISuggestedItemProps,
+  ref: Ref<HTMLLIElement>,
+) {
   const [isSelected, setIsSelected] = useState(false);
 
   if (typeof suggestedItem !== 'string' || typeof inputText !== 'string') {
@@ -21,7 +24,7 @@ function SuggestedItem({ suggestedItem, inputText, setInputText }: ISuggestedIte
   };
 
   return (
-    <li className={`item${isSelected ? ' selected' : ''}`} onClick={handleItemClick}>
+    <li ref={ref} className={`item${isSelected ? ' selected' : ''}`} onClick={handleItemClick}>
       {cutItem
         .replaceAll(inputText, `${SEPARATOR}${inputText}${SEPARATOR}`)
         .split(SEPARATOR)
@@ -34,4 +37,4 @@ function SuggestedItem({ suggestedItem, inputText, setInputText }: ISuggestedIte
   );
 }
 
-export default SuggestedItem;
+export default forwardRef(SuggestedItem);
