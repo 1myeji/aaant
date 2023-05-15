@@ -14,8 +14,6 @@ const baseInstance = axios.create({
   },
 });
 
-baseInstance.interceptors.response.use(({ data }) => data.data);
-
 const apiRequest = {
   get: async (url: string) => baseInstance.get(url),
 };

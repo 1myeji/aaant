@@ -46,6 +46,7 @@ module.exports = {
     '@typescript-eslint/no-confusing-void-expression': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'no-alert': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off',
   },
   ignorePatterns: ['node_modules/'],
 };
