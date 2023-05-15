@@ -7,10 +7,10 @@ export type ISuggestedListData = {
   limit: number;
 };
 
-export type ITodoListProps = {
+export type ISuggestedListProps = {
   suggestedList: string[];
 };
 
-export type ITodoItemProps = {
+export type ISuggestedItemProps = {
   suggestedItem: string;
 };

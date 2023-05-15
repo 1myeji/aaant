@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
+import { FaSpinner } from 'react-icons/fa';
 import getSuggestedSearchList from '../api/search';
-import TodoList from './TodoList';
+import SuggestedList from './SuggestedList';
 import { type ISuggestedListData } from '../types/global';
 
-function InputTodo() {
+function InputSearch() {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -50,17 +50,11 @@ function InputTodo() {
           onChange={e => setInputText(e.target.value)}
           disabled={isLoading}
         />
-        {!isLoading ? (
-          <button className="input-submit" type="submit">
-            <FaPlusCircle className="btn-plus" />
-          </button>
-        ) : (
-          <FaSpinner className="spinner" />
-        )}
+        {isLoading && <FaSpinner className="spinner" />}
       </form>
-      <TodoList suggestedList={suggestedList} />
+      <SuggestedList suggestedList={suggestedList} />
     </>
   );
 }
 
-export default InputTodo;
+export default InputSearch;
