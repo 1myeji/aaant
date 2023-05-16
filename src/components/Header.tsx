@@ -3,7 +3,7 @@ import React from 'react';
 function Header() {
   return (
     <header style={headerStyle}>
-      <h1 style={titleStyle}>앤트</h1>
+      <h1 style={titleStyle}>원티드 과제</h1>
     </header>
   );
 }
@@ -15,7 +15,7 @@ const headerStyle = {
   lineHeight: '1.5em',
 };
 const titleStyle = {
-  fontSize: '6rem',
+  fontSize: '5rem',
   fontWeight: '600',
   marginBottom: '2rem',
   lineHeight: '1em',

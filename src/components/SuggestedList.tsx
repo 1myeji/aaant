@@ -12,8 +12,12 @@ function SuggestedList({
     <ul className="suggested-list">
       {suggestedList.map((suggestedItem: string, index: number) => (
         <SuggestedItem
-          ref={index === suggestedList.length - 1 ? lastSuggestedItemRef : null}
-          key={suggestedItem}
+          ref={
+            index === suggestedList.length - 1 && suggestedList.length % 10 === 0
+              ? lastSuggestedItemRef
+              : null
+          }
+          key={index}
           suggestedItem={suggestedItem}
           inputText={inputText}
           setInputText={setInputText}

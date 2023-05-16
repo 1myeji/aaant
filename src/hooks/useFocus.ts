@@ -1,12 +1,16 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 
 const useFocus = () => {
-  const ref = useRef<HTMLInputElement | null>(null);
-  const setFocus = () => {
-    ref.current?.focus();
+  const [isFocus, setIsFocus] = useState(false);
+  const handleFocus = () => {
+    setIsFocus(true);
   };
 
-  return { ref, setFocus };
+  const handleBlur = () => {
+    setIsFocus(false);
+  };
+
+  return { isFocus, handleFocus, handleBlur };
 };
 
 export default useFocus;
